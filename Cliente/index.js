@@ -16,7 +16,7 @@ app.get('/getorder', function(req,res){
     var num = Math.floor(Math.random() * (1000-1)+1)
     var descripcion = "Se creo una orden con id:"+num
     axios.post('http://localhost:3003/log',{'descripcion':descripcion})
-    axios.post('http://localhost:3001/postorder',{'id':num})
+    axios.post('http://localhost:3004/restaurante/postorder',{'id':num})
     res.json({'id':num})    
 })
 
