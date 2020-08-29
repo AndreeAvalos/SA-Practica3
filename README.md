@@ -35,6 +35,7 @@ node Cliente/index.js
 node Restaurante/index.js
 node Repartidor/index.js
 node log/index.js
+node ESB/orquestador.js
 ```
 
 ## Colaborador
