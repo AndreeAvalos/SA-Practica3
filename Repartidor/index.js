@@ -15,14 +15,14 @@ app.post('/postorder',body_parser, function(req,res){
     var order = req.body.id
     var dm = req.body.deliveryman
     var descripcion = "Se recibio orden:"+order+" para repartidor:"+dm
-    axios.post('http://localhost:3003/log',{'descripcion':descripcion})
+    axios.post('http://localhost:3004/log/post',{'descripcion':descripcion})
     res.send("OK")
 });
 
 app.get('/getorder/:order',body_parser, function(req, res){
     var order = req.params.order
     var descripcion = "Se recibio orden:"+order+" para saber su estado de envio"
-    axios.post('http://localhost:3003/log',{'descripcion':descripcion})
+    axios.post('http://localhost:3004/log/post',{'descripcion':descripcion})
 
     var state = Math.floor(Math.random() * (2-1)+1)
     if(state==1){
@@ -30,14 +30,14 @@ app.get('/getorder/:order',body_parser, function(req, res){
     }else{
         descripcion = "Orden:"+order+" entregada"
     }
-    axios.post('http://localhost:3003/log',{'descripcion':descripcion})
+    axios.post('http://localhost:3004/log/post',{'descripcion':descripcion})
     res.send(descripcion)
 });
 
 app.post('/postdelivery',body_parser,function(req,res){
     var order = req.body.id
     var descripcion = "Se recibio orden:"+order+" para marcar como entregada"
-    axios.post('http://localhost:3003/log',{'descripcion':descripcion})
+    axios.post('http://localhost:3004/log/post',{'descripcion':descripcion})
     res.send("OK")
 });
 

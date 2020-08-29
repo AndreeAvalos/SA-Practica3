@@ -15,7 +15,7 @@ app.get('/', function(req, res) {
 app.get('/getorder', function(req,res){
     var num = Math.floor(Math.random() * (1000-1)+1)
     var descripcion = "Se creo una orden con id:"+num
-    axios.post('http://localhost:3003/log',{'descripcion':descripcion})
+    axios.post('http://localhost:3004/log/post',{'descripcion':descripcion})
     axios.post('http://localhost:3004/restaurante/postorder',{'id':num})
     res.json({'id':num})    
 })
@@ -23,8 +23,8 @@ app.get('/getorder', function(req,res){
 app.get('/getstateorder',body_parser,function(req,res){
     var order = req.body.id
     var descripcion = "Se desea saber el estado de orden:"+order
-    axios.post('http://localhost:3003/log',{'descripcion':descripcion})
-    axios.get('http://localhost:3001/getstate/'+order)
+    axios.post('http://localhost:3004/log/post',{'descripcion':descripcion})
+    axios.get('http://localhost:3004/restaurante/getstate/'+order)
         .then(function(response){
             res.send(response['data'])
         })
@@ -32,14 +32,15 @@ app.get('/getstateorder',body_parser,function(req,res){
             console.log(error);
         })
         .then(function () {
+            res.send("finish")
         });
 });
 
 app.get('/getstatedelivery',body_parser,function(req,res){
     var order = req.body.id
     var descripcion = "Se desea saber el estado de envio de orden:"+order
-    axios.post('http://localhost:3003/log',{'descripcion':descripcion})
-    axios.get('http://localhost:3002/getorder/'+order)
+    axios.post('http://localhost:3004/log/post',{'descripcion':descripcion})
+    axios.get('http://localhost:3004/repartidor/getstate/'+order)
     .then(function(response){
         res.send(response['data'])
     });
